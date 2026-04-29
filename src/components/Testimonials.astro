@@ -1,0 +1,44 @@
+---
+import TestimonialCard from "./TestimonialCard.astro";
+
+const testimonials = [
+  {
+    quote: "Díky monitoringu jsme odhalili poruchu během hodin místo týdnů. Ušetřili nám statisíce.",
+    name: "Technický manažer",
+    company: "Energetická společnost",
+  },
+  {
+    quote: "Dispečink reaguje okamžitě. Máme jistotu, že naše elektrárny běží naplno.",
+    name: "Investor FVE",
+    company: "Private investor",
+  },
+  {
+    quote: "Profesionální servis a rychlá reakce při poruchách. Doporučujeme.",
+    name: "Provozní ředitel",
+    company: "Průmyslová firma",
+  },
+];
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- HEADER -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold">
+        Firmy nám svěřují dohled nad svými elektrárnami
+      </h2>
+      <p class="mt-4 text-gray-600">
+        Spravujeme fotovoltaické elektrárny po celé České republice.
+      </p>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map(t => (
+        <TestimonialCard {...t} />
+      ))}
+    </div>
+
+  </div>
+</section>

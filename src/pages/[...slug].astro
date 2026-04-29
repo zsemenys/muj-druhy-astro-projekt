@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  
+  return pages.map(page => {
+    // If id is 'cz/index', 'cz/index.mdx' -> slug is 'cz/index'
+    // But we might want the URL to be just '/cz'
+    let slug = page.id;
+    if (slug.endsWith('index')) {
+        slug = slug.replace('/index', '') || undefined;
+    }
+    
+    return {
+      params: { slug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<MainLayout title={page.data.title || 'SOLARMON'} description={page.data.description || ''}>
+  <div class="pt-24 pb-16 bg-white dark:bg-gray-900 min-h-screen">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">
+        {page.data.title}
+      </h1>
+      
+      <div class="prose prose-lg prose-primary dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </div>
+  </div>
+</MainLayout>

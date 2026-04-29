@@ -1,0 +1,58 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// JSON-LD data pro článek
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "datePublished": post.data.pubDate,
+  "author": {
+    "@type": "Organization",
+    "name": "Solarmon"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Solarmon"
+  }
+};
+---
+
+<MainLayout 
+  title={post.data.title}
+  description={post.data.description}
+>
+
+  <!-- 🔥 TOTO JE ONO – jde do <head> -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="max-w-3xl mx-auto px-4 py-16">
+
+    <h1 class="text-4xl font-bold mb-6">
+      {post.data.title}
+    </h1>
+
+    <p class="text-gray-600 mb-10">
+      {post.data.description}
+    </p>
+
+    <div class="prose max-w-none">
+      <Content />
+    </div>
+
+  </article>
+
+</MainLayout>

@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const { title, description, href } = Astro.props;
+---
+
+<a href={href} class="group block p-8 rounded-3xl border border-gray-100 hover:border-primary-300 hover:shadow-2xl hover:shadow-primary-900/10 transition-all duration-300 bg-white relative overflow-hidden hover:-translate-y-1">
+  <!-- Accent top bar on hover -->
+  <div class="absolute top-0 left-0 w-full h-1 bg-accent-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+  
+  <div class="flex flex-col h-full relative z-10">
+
+    <!-- ICON -->
+    <div class="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300 shadow-sm text-primary-600">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    </div>
+
+    <!-- TITLE -->
+    <h3 class="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary-700 transition-colors">
+      {title}
+    </h3>
+
+    <!-- DESCRIPTION -->
+    <p class="text-gray-600 leading-relaxed flex-grow">
+      {description}
+    </p>
+
+    <!-- LINK -->
+    <span class="mt-8 font-semibold text-primary-600 group-hover:text-accent-500 transition-colors flex items-center gap-2">
+      Zjistit více 
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+
+  </div>
+</a>

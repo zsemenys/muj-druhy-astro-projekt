@@ -1,0 +1,79 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/global.css'
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const url = Astro.site ?? "https://solarmon.eu";
+---
+
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BASIC SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <slot name="head" />
+    <!-- GOOGLE -->
+    <link rel="canonical" href={url + Astro.url.pathname} />
+
+    <!-- OpenGraph (Facebook / LinkedIn) -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url + Astro.url.pathname} />
+    <meta property="og:image" content="/images/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.svg" />
+
+    <!-- FONTS (Google Fonts – modern, rychlé) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+
+    <!-- SCHEMA.ORG (velmi důležité pro Google) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SOLARMONITORING s.r.o.",
+        "url": "https://solarmon.eu",
+        "logo": "https://solarmon.eu/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+420XXXXXXXXX",
+          "contactType": "customer service",
+          "areaServed": "CZ"
+        }
+      }
+    </script>
+
+  </head>
+
+  <body class="bg-white text-gray-900">
+
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+
+  </body>
+</html>

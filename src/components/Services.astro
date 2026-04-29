@@ -1,0 +1,50 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+
+const services = [
+  {
+    title: "Monitoring FVE",
+    description: "Nepřetržitý dohled nad výkonem elektrárny a okamžité odhalení poruch.",
+    href: "/cz/produkty-a-sluzby/monitoring-solarnich-elektraren",
+  },
+  {
+    title: "Dispečink FVE",
+    description: "24/7 dohled, alarmy a reakce na výpadky v reálném čase.",
+    href: "/cz/produkty-a-sluzby/dispecink",
+  },
+  {
+    title: "Servis FVE",
+    description: "Pravidelný i havarijní servis fotovoltaických elektráren po celé ČR.",
+    href: "/cz/produkty-a-sluzby/servis-full",
+  },
+  {
+    title: "Opravy měničů",
+    description: "Diagnostika a opravy střídačů všech hlavních výrobců.",
+    href: "/cz/produkty-a-sluzby/opravy-menicu",
+  },
+];
+---
+
+<section class="py-16 md:py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- HEADER -->
+    <div class="max-w-2xl mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold">
+        Kompletní správa fotovoltaických elektráren
+      </h2>
+      <p class="mt-4 text-gray-600">
+        Od monitoringu přes dispečink až po servis a opravy. 
+        Postaráme se o maximální výkon vaší FVE.
+      </p>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map(service => (
+        <ServiceCard {...service} />
+      ))}
+    </div>
+
+  </div>
+</section>
